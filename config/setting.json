@@ -1,0 +1,15 @@
+{
+  "api": [
+    {
+      "path": "/date",
+      "roule": {
+        "methordName": "boolean",
+        "args": {
+          "max": "5",
+          "min": "1",
+          "current": "10"
+        }
+      }
+    }
+  ]
+}
