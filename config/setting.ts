@@ -1,8 +1,8 @@
-{
-  "api": [
+module.exports = {
+  "random": [
     {
       "path": "/date",
-      "roule": {
+      "rule": {
         "methordName": "boolean",
         "args": {
           "max": "5",
@@ -11,5 +11,11 @@
         }
       }
     }
+  ],
+  "mock": [
+    {
+      "path": "/asdf",
+      "rule": `'name|1-12':asdf`
+    }
   ]
-}
+};
