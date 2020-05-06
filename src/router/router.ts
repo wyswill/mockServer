@@ -1,23 +1,27 @@
-///<reference path="../../types/setting.d.ts"/>
+///<reference path="../types/setting.d.ts"/>
 
 import * as express from "express";
 
-const Mock = require("mockjs");
+const Mocks = require("mockjs");
 const router = express.Router();
-const { random: random, mock: mock } = require("../../config/setting");
-console.log({ random, mock });
-if (random) {
-  random.map((ele) => {
-    console.log(ele);
+const mock: Mock = require("../config/setting");
+if (mock.random) {
+  mock.random.map((ele: random) => {
+    router.get(ele.path, ((req: any, res: any) => {
+      if (Mocks.Random[ele.rule])
+        res.json(Mocks.Random[ele.rule](...ele.args));
+      else res.sendStatus(404);
+    }));
   });
 }
-// router.get("/", (req: any, res: any) => {
-//   const data: string = mock.mock({
-//     "list|1-10": [{
-//       "id|+1": 1
-//     }]
-//   });
-//   res.send(data);
-// });
+if (mock.mock) {
+  mock.mock.map((ele: mock) => {
+    router.get(ele.path, ((req: any, res: any) => {
+      let t: any = {};
+      t[`${ele.rule}`] = ele.value;
+      res.send(Mocks.mock(t));
+    }));
+  });
+}
 
 module.exports = router;
