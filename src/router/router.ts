@@ -1,6 +1,7 @@
 ///<reference path="../types/setting.d.ts"/>
 import * as express from "express";
-import { config, Taps } from "../config/setting";
+import { config } from "../config/setting";
+import { Taps } from "../types/declares";
 
 const Mocks = require("mockjs");
 const router = express.Router();
@@ -15,8 +16,13 @@ config.map((ele) => {
             if (val.type == Taps.mock)
               t[`${val.rule}`] = val.value;
             else {
-              // @ts-ignore
-              resdata[`${val.methodName}_${index}`] = Mocks.Random[val.methodName](...val.args);
+              if (resdata[`${val.methodName}`]) {
+                // @ts-ignore
+                resdata[`${val.methodName}_${index}`] = Mocks.Random[val.methodName](...val.args);
+              } else {
+                // @ts-ignore
+                resdata[`${val.methodName}`] = Mocks.Random[val.methodName](...val.args);
+              }
             }
           });
         } else t[`${ele.rule}`] = ele.value;
@@ -33,14 +39,5 @@ config.map((ele) => {
     }
   }));
 });
-// if (mock.random) {
-//   mock.random.map((ele: random) => {
-//     router.get(ele.path, ((req: any, res: any) => {
-//       if (Mocks.Random[ele.rule])
-//         res.json(Mocks.Random[ele.rule](...ele.args));
-//       else res.sendStatus(404);
-//     }));
-//   });
-// }
 
 module.exports = router;

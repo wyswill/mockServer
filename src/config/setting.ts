@@ -1,10 +1,10 @@
-export enum Taps {random = "random", mock = "mock"}
+import { MethodNames, Taps } from "../types/declares";
 
 export const config = [
   {
     path: "/text",
     type: Taps.random,
-    methodName: "boolean",
+    methodName: MethodNames.boolean,
     args: []
   },
   {
@@ -23,7 +23,7 @@ export const config = [
         type: Taps.mock
       },
       {
-        rule: "asdf|1-12",
+        rule: "324|1-12",
         value: 123123,
         type: Taps.mock
       },
@@ -34,13 +34,13 @@ export const config = [
       },
       {
         type: Taps.random,
-        methodName: "boolean",
+        methodName: MethodNames.clast,
         args: [212]
       },
       {
         type: Taps.random,
         methodName: "boolean",
-        args: [123123,3241234]
+        args: [123123, 3241234]
       }
     ]
   }

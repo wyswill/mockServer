@@ -10,23 +10,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 ///<reference path="../types/setting.d.ts"/>
 var express = __importStar(require("express"));
 var setting_1 = require("../config/setting");
+var declares_1 = require("../types/declares");
 var Mocks = require("mockjs");
 var router = express.Router();
 setting_1.config.map(function (ele) {
     router.get(ele.path, (function (req, res) {
         var _a;
         switch (ele.type) {
-            case setting_1.Taps.mock:
+            case declares_1.Taps.mock:
                 var t_1 = {};
                 var resdata_1 = {};
                 if (ele.rules) {
                     ele.rules.map(function (val, index) {
-                        var _a;
-                        if (val.type == setting_1.Taps.mock)
+                        var _a, _b;
+                        if (val.type == declares_1.Taps.mock)
                             t_1["" + val.rule] = val.value;
                         else {
-                            // @ts-ignore
-                            resdata_1[val.methodName + "_" + index] = (_a = Mocks.Random)[val.methodName].apply(_a, val.args);
+                            if (resdata_1["" + val.methodName]) {
+                                // @ts-ignore
+                                resdata_1[val.methodName + "_" + index] = (_a = Mocks.Random)[val.methodName].apply(_a, val.args);
+                            }
+                            else {
+                                // @ts-ignore
+                                resdata_1["" + val.methodName] = (_b = Mocks.Random)[val.methodName].apply(_b, val.args);
+                            }
                         }
                     });
                 }
@@ -35,7 +42,7 @@ setting_1.config.map(function (ele) {
                 Object.assign(resdata_1, Mocks.mock(t_1));
                 res.json(resdata_1);
                 break;
-            case setting_1.Taps.random:
+            case declares_1.Taps.random:
                 // @ts-ignore
                 if (Mocks.Random[ele.methodName]) {
                     // @ts-ignore
@@ -47,13 +54,4 @@ setting_1.config.map(function (ele) {
         }
     }));
 });
-// if (mock.random) {
-//   mock.random.map((ele: random) => {
-//     router.get(ele.path, ((req: any, res: any) => {
-//       if (Mocks.Random[ele.rule])
-//         res.json(Mocks.Random[ele.rule](...ele.args));
-//       else res.sendStatus(404);
-//     }));
-//   });
-// }
 module.exports = router;

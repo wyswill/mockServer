@@ -1,4 +1,4 @@
-import { Taps } from "../config/setting";
+import { Taps } from "./declares";
 
 
 declare type mockDateItemMock = {
