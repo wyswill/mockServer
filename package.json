@@ -5,7 +5,7 @@
   "author": "wyswill",
   "license": "MIT",
   "scripts": {
-    "dev": "tsc && nodemon  ./src/main.ts"
+    "dev": " nodemon  ./src/main.ts"
   },
   "dependencies": {
     "express": "^4.17.1",

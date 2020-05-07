@@ -4,20 +4,14 @@ import { Taps } from "./declares";
 declare type mockDateItemMock = {
   path: string
   type: Taps.mock
-  rule: string
-  args: Array<mockDateItemMock2 | any>
-}
-
-declare type mockDateItemMock2 = {
-  rule: string,
-  value: any[],
-  type: Taps.mock
+  rule: any[] | string
+  value: any
 }
 declare type mockDateItemRandom = {
   path: string
   type: Taps.random
   methodName: string
-  args: any[]
+  value: any[]
 }
 
 declare type config = Array<mockDateItemMock | mockDateItemRandom>

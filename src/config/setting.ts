@@ -2,21 +2,9 @@ import { MethodNames, Taps } from "../types/declares";
 
 export const config = [
   {
-    path: "/text",
-    type: Taps.random,
-    methodName: MethodNames.boolean,
-    args: []
-  },
-  {
-    path: "/text2",
+    path: "",
     type: Taps.mock,
-    rule: "text|1-12",
-    value: "21312"
-  },
-  {
-    path: "/test4",
-    type: Taps.mock,
-    rules: [
+    rule: [
       {
         rule: "test|1-12",
         value: 123123,
@@ -42,6 +30,7 @@ export const config = [
         methodName: "boolean",
         args: [123123, 3241234]
       }
-    ]
+    ],
+    value: undefined
   }
 ];
