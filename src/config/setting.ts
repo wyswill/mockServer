@@ -1,4 +1,5 @@
-export enum Taps {random = "random", mock = "mock"};
+export enum Taps {random = "random", mock = "mock"}
+
 export const config = [
   {
     path: "/text",
@@ -22,9 +23,24 @@ export const config = [
         type: Taps.mock
       },
       {
+        rule: "asdf|1-12",
+        value: 123123,
+        type: Taps.mock
+      },
+      {
+        rule: "asdf|1-12",
+        value: 123123,
+        type: Taps.mock
+      },
+      {
+        type: Taps.random,
         methodName: "boolean",
-        value: [],
-        type: Taps.random
+        args: [212]
+      },
+      {
+        type: Taps.random,
+        methodName: "boolean",
+        args: [123123,3241234]
       }
     ]
   }
