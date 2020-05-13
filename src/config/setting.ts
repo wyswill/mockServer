@@ -2,7 +2,7 @@ import { MethodNames, Taps } from "../types/declares";
 
 export const config = [
   {
-    path: "",
+    path: "/",
     type: Taps.mock,
     rule: [
       {

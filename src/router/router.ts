@@ -5,14 +5,14 @@ import { Taps } from "../types/declares";
 
 const Mocks = require("mockjs");
 const router = express.Router();
-config.map((ele) => {
+config.forEach((ele) => {
   router.get(ele.path, (req, res) => {
     switch (ele.type) {
       case Taps.mock:
         let t: any = {};
         let resdata: any = {};
         if (Array.isArray(ele.rule)) {
-          ele.rule.map((val, index) => {
+          ele.rule.forEach((val, index) => {
             if (val.type == Taps.mock) t[`${val.rule}`] = val.value;
             else {
               if (resdata[`${val.methodName}`]) {
